@@ -15,10 +15,10 @@ const getAllCharactersQuery = gql`
         id
         name
         gender
-        episode {
-          id
-        }
-        created
+        status
+        species
+        type
+        image
       }
     }
   }
