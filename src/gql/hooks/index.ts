@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 
 import { getAllCharacters } from "gql/queries";
 import { Character } from "utils";
@@ -11,9 +11,15 @@ import { GetAllCharactersResponseType } from "./types";
  * @returns
  */
 const useGetAllCharacters = () => {
-  return useQuery<GetAllCharactersResponseType<Character>>(
+  return useInfiniteQuery<GetAllCharactersResponseType<Character>>(
     [ALL_CHARACTERS_DATA],
-    getAllCharacters
+    async ({ pageParam = 1 }) => await getAllCharacters(pageParam),
+    {
+      getPreviousPageParam: (firstPage) =>
+        firstPage.characters.info.prev ?? undefined,
+      getNextPageParam: (lastPage) =>
+        lastPage.characters.info.next ?? undefined,
+    }
   );
 };
 
