@@ -8,7 +8,7 @@ export const theme: ThemeOptions = createTheme({
       default: "#121212",
     },
     primary: {
-      main: purple[800],
+      main: purple[600],
     },
     text: {
       primary: '#fff8e1',

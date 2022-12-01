@@ -51,6 +51,8 @@ const CharacterCard: FC<CharacterCardProps> = (props) => {
           alt={name}
           onLoad={handleImageLoaded}
           sx={imageStyle}
+          width={300}
+          height={300}
         />
 
         <CardContent sx={{ flexGrow: 1 }}>

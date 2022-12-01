@@ -1,13 +1,14 @@
-import { Fragment, useEffect, useId } from "react";
+import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
-import { Box, CircularProgress, Container, Grid } from "@mui/material";
+import { Box, CircularProgress, Container } from "@mui/material";
 
 import AppLayout from "components/layout";
-import CharacterCard from "components/ui/card";
 import { useGetAllCharacters } from "gql";
+import CardsContainer from "features/cards-container";
 
 function App() {
   const {
+    isInitialLoading,
     status,
     data,
     isFetching,
@@ -17,7 +18,6 @@ function App() {
   } = useGetAllCharacters();
 
   const { ref, inView } = useInView();
-  const uniqueId = useId();
 
   useEffect(() => {
     if (inView && !isFetching) {
@@ -33,24 +33,10 @@ function App() {
         ) : status === "error" ? (
           <span>Error</span>
         ) : (
-          <Grid container spacing={2}>
-            {data.pages.map((page) => (
-              <Fragment key={uniqueId}>
-                {page.characters.results.map(
-                  ({ name, image, status, species, type, gender }) => (
-                    <CharacterCard
-                      name={name}
-                      image={image}
-                      status={status}
-                      species={species}
-                      subSpecies={type}
-                      gender={gender}
-                    />
-                  )
-                )}
-              </Fragment>
-            ))}
-          </Grid>
+          <CardsContainer
+            isInitialLoading={isInitialLoading}
+            pages={data.pages}
+          />
         )}
         <Box
           ref={ref}
