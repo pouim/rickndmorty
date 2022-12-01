@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { Box, CircularProgress, Container } from "@mui/material";
+import { isEmpty } from "lodash";
 
 import AppLayout from "components/layout";
 import { useGetAllCharacters } from "gql";
@@ -42,6 +43,8 @@ function App() {
     }
   }, [fetchNextPage, inView, isFetching]);
 
+  console.log("test", data, isEmpty(data?.pages[0]?.characters.results));
+
   return (
     <AppLayout>
       <Box
@@ -51,7 +54,10 @@ function App() {
         }}
       >
         <Container maxWidth="sm">
-          <SearchBar onChange={handleSearch} placeHolder='Search character by name ...' />
+          <SearchBar
+            onChange={handleSearch}
+            placeHolder="Search character by name ..."
+          />
         </Container>
       </Box>
       <Container sx={{ py: 8 }} maxWidth="lg">
@@ -74,7 +80,9 @@ function App() {
           ) : hasNextPage ? (
             "Load Newer"
           ) : (
-            <Box height={400}>Not Found!</Box>
+            isEmpty(data?.pages[0]?.characters.results) && (
+              <Box height={200}>Not Found!</Box>
+            )
           )}
         </Box>
         <div>
