@@ -18,13 +18,14 @@ function Copyright() {
 
 export const Footer = () => {
   return (
-    <Box sx={{ p: 6 }} component="footer">
+    <Box sx={{ p: 6 }} component="footer" data-testid="#footer-container">
       <Divider />
       <Typography
         variant="subtitle1"
         align="center"
         color="text.secondary"
         component="p"
+        role="textbox"
       >
         Designed & developed by
       </Typography>

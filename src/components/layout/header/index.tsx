@@ -4,7 +4,7 @@ import MortyIcon from "components/icons/Morty";
 
 export const Header = () => {
   return (
-    <AppBar position="relative">
+    <AppBar position="relative" data-testid="#header-container">
       <Toolbar>
         <MortyIcon />
         <Typography
@@ -12,6 +12,7 @@ export const Header = () => {
           variant="h4"
           color="inherit"
           noWrap
+          role="textbox"
         >
           Rick and Morty
         </Typography>
