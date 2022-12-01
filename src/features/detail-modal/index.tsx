@@ -15,7 +15,7 @@ import { modalContentContainerStyle } from "./styles";
 import { useCloseDetailModal, useDetailModalReducer } from "./slice";
 import { useGetCharacterDetail } from "gql";
 import { generateGenderPrefix } from "utils/functions";
-import Status from "components/ui/card/status";
+import Status from "components/ui/card/Status";
 
 const CharacterDetailModal = () => {
   const { isOpen, characterId } = useDetailModalReducer();

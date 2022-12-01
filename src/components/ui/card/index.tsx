@@ -11,7 +11,7 @@ import {
 
 import { CharacterCardProps } from "./types";
 import { generateGenderPrefix } from "utils/functions";
-import Status from "./status";
+import Status from "./Status";
 import { useOpenDetailModal } from "features/detail-modal/slice";
 
 const CharacterCard: FC<CharacterCardProps> = (props) => {
