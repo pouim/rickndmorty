@@ -1,4 +1,5 @@
 # Rick and Morty 
+## Demo is available here https://rickndmorty.vercel.app/
 
 ## Available Scripts
 
@@ -16,6 +17,4 @@ then
  - React Query - To handle server states.
  - graphql-request - To fetch data from gql endpoint.
  - mui - Theming system and styling.
-
-
 ## Developed by: @Pouyan Ahmadpour - 2022
