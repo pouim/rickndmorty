@@ -1,10 +1,11 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { Box, CircularProgress, Container } from "@mui/material";
 
 import AppLayout from "components/layout";
 import { useGetAllCharacters } from "gql";
 import CardsContainer from "features/cards-container";
+import SearchBar from "components/ui/search-bar";
 
 function App() {
   const {
@@ -19,6 +20,11 @@ function App() {
 
   const { ref, inView } = useInView();
 
+
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log("test", event.target.value);
+  };
+
   useEffect(() => {
     if (inView && !isFetching) {
       fetchNextPage();
@@ -27,6 +33,16 @@ function App() {
 
   return (
     <AppLayout>
+      <Box
+        sx={{
+          pt: 4,
+          pb: 6,
+        }}
+      >
+        <Container maxWidth="sm">
+          <SearchBar onChange={handleSearch} />
+        </Container>
+      </Box>
       <Container sx={{ py: 8 }} maxWidth="lg">
         {status === "loading" ? (
           <p>Loading...</p>

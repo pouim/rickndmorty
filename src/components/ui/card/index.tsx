@@ -11,7 +11,7 @@ import {
 
 import { CharacterCardProps } from "./types";
 import { generateGenderPrefix } from "utils/functions";
-import Status from "./Status";
+import Status from "./status";
 
 const CharacterCard: FC<CharacterCardProps> = (props) => {
   const { name, image, gender, status, species, subSpecies } = props;
