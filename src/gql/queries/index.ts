@@ -24,7 +24,33 @@ const getAllCharactersQuery = gql`
   }
 `;
 
+const getSpecificCharacterQuery = gql`
+  query getCharacters($id: ID!) {
+    character(id: $id) {
+      name
+      status
+      species
+      type
+      gender
+      origin {
+        name
+      }
+      location {
+        name
+      }
+      image
+      episode {
+        name
+      }
+      created
+    }
+  }
+`;
+
 const getAllCharacters = (pageNumber = 1, filter = {}) =>
   graphQLClient.request(getAllCharactersQuery, { pageNumber, filter });
 
-export { getAllCharacters };
+const getCharacterDetail = (id: number) =>
+  graphQLClient.request(getSpecificCharacterQuery, { id });
+
+export { getAllCharacters, getCharacterDetail };

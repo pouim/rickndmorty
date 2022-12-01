@@ -5,9 +5,9 @@ import CharacterCard from "components/ui/card";
 import { CardsContainerProps } from "./types";
 
 const CardsContainer: FC<CardsContainerProps> = (props) => {
-    const { isInitialLoading, pages, } = props;
+  const { isInitialLoading, pages } = props;
 
-    const uniqueId = useId();
+  const uniqueId = useId();
   return (
     <Grid container spacing={2}>
       {isInitialLoading &&
@@ -16,6 +16,7 @@ const CardsContainer: FC<CardsContainerProps> = (props) => {
           .map((item) => (
             <Skeleton>
               <CharacterCard
+                id=""
                 name=""
                 image=""
                 status="Alive"
@@ -29,8 +30,9 @@ const CardsContainer: FC<CardsContainerProps> = (props) => {
       {pages.map((page) => (
         <Fragment key={uniqueId}>
           {page.characters.results.map(
-            ({ name, image, status, species, type, gender }) => (
+            ({ id, name, image, status, species, type, gender }) => (
               <CharacterCard
+                id={id}
                 name={name}
                 image={image}
                 status={status}

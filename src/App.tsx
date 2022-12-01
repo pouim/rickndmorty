@@ -7,6 +7,7 @@ import AppLayout from "components/layout";
 import { useGetAllCharacters } from "gql";
 import CardsContainer from "features/cards-container";
 import SearchBar from "components/ui/search-bar";
+import CharacterDetailModal from "features/detail-modal";
 
 function App() {
   const [name, setName] = useState("");
@@ -42,8 +43,6 @@ function App() {
       fetchNextPage();
     }
   }, [fetchNextPage, inView, isFetching]);
-
-  console.log("test", data, isEmpty(data?.pages[0]?.characters.results));
 
   return (
     <AppLayout>
@@ -89,6 +88,7 @@ function App() {
           {isFetching && !isFetchingNextPage ? "Background Updating..." : null}
         </div>
       </Container>
+      <CharacterDetailModal />
     </AppLayout>
   );
 }

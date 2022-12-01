@@ -8,6 +8,11 @@ export type Location = {
   name: string;
 };
 
+export type Origin = {
+  id: number;
+  name: string;
+};
+
 export type CharacterGender = "Male" | "Female" | "unknown";
 export type CharacterStatus = "Alive" | "Dead" | "unknown";
 
@@ -22,4 +27,5 @@ export type Character = {
   species: string;
   type: string;
   location: Location;
+  origin: Origin;
 };

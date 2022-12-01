@@ -1,5 +1,5 @@
 import { createTheme, ThemeOptions } from "@mui/material";
-import { purple } from "@mui/material/colors";
+import { grey, purple } from "@mui/material/colors";
 
 export const theme: ThemeOptions = createTheme({
   palette: {
@@ -12,7 +12,7 @@ export const theme: ThemeOptions = createTheme({
     },
     text: {
       primary: '#fff8e1',
-      secondary: '#fff8e1',
+      secondary: grey[500],
     },
   },
 });

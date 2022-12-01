@@ -12,10 +12,13 @@ import {
 import { CharacterCardProps } from "./types";
 import { generateGenderPrefix } from "utils/functions";
 import Status from "./status";
+import { useOpenDetailModal } from "features/detail-modal/slice";
 
 const CharacterCard: FC<CharacterCardProps> = (props) => {
-  const { name, image, gender, status, species, subSpecies } = props;
+  const { id, name, image, gender, status, species, subSpecies } = props;
   const [isImageLoaded, setIsImageLoaded] = useState(false);
+
+  const onOpenDetailModal = useOpenDetailModal();
 
   const imageStyle = !isImageLoaded ? { display: "none" } : {};
 
@@ -28,6 +31,14 @@ const CharacterCard: FC<CharacterCardProps> = (props) => {
   const handleImageLoaded = useCallback(() => {
     !isImageLoaded && setIsImageLoaded(true);
   }, [isImageLoaded]);
+
+  /**
+   * @function handleViewMore
+   * @returns { void }
+   */
+  const handleViewMore = useCallback(() => {
+    onOpenDetailModal(+id);
+  }, [id, onOpenDetailModal]);
 
   return (
     <Grid item key={uniqueKey} xs={12} sm={6} md={4} lg={3}>
@@ -61,7 +72,7 @@ const CharacterCard: FC<CharacterCardProps> = (props) => {
           </Typography>
           <Status status={status} species={species} subSpecies={subSpecies} />
         </CardContent>
-        <Button variant="text" size="medium">
+        <Button variant="text" size="medium" onClick={handleViewMore}>
           More Info
         </Button>
       </Card>
