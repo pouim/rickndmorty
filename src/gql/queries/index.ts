@@ -3,8 +3,8 @@ import { gql } from "graphql-request";
 import { graphQLClient } from "gql/config";
 
 const getAllCharactersQuery = gql`
-  query getCharacters($pageNumber: Int!) {
-    characters(page: $pageNumber) {
+  query getCharacters($pageNumber: Int!, $filter: FilterCharacter!) {
+    characters(page: $pageNumber, filter: $filter) {
       info {
         count
         pages
@@ -24,7 +24,7 @@ const getAllCharactersQuery = gql`
   }
 `;
 
-const getAllCharacters = (pageNumber = 1) =>
-  graphQLClient.request(getAllCharactersQuery, { pageNumber });
+const getAllCharacters = (pageNumber = 1, filter = {}) =>
+  graphQLClient.request(getAllCharactersQuery, { pageNumber, filter });
 
 export { getAllCharacters };

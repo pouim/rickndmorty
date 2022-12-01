@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { Box, CircularProgress, Container } from "@mui/material";
 
@@ -8,6 +8,8 @@ import CardsContainer from "features/cards-container";
 import SearchBar from "components/ui/search-bar";
 
 function App() {
+  const [name, setName] = useState("");
+
   const {
     isInitialLoading,
     status,
@@ -16,14 +18,23 @@ function App() {
     isFetchingNextPage,
     fetchNextPage,
     hasNextPage,
-  } = useGetAllCharacters();
+    refetch,
+  } = useGetAllCharacters(name);
 
   const { ref, inView } = useInView();
 
-
+  /**
+   * @function handleSearch
+   * @param { React.ChangeEvent<HTMLInputElement> } event
+   */
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("test", event.target.value);
+    const searchKeyWord = event.target.value;
+    setName(searchKeyWord);
   };
+
+  useEffect(() => {
+    refetch();
+  }, [name, refetch]);
 
   useEffect(() => {
     if (inView && !isFetching) {
@@ -40,7 +51,7 @@ function App() {
         }}
       >
         <Container maxWidth="sm">
-          <SearchBar onChange={handleSearch} />
+          <SearchBar onChange={handleSearch} placeHolder='Search character by name ...' />
         </Container>
       </Box>
       <Container sx={{ py: 8 }} maxWidth="lg">
@@ -63,7 +74,7 @@ function App() {
           ) : hasNextPage ? (
             "Load Newer"
           ) : (
-            "Nothing more to load"
+            <Box height={400}>Not Found!</Box>
           )}
         </Box>
         <div>

@@ -10,10 +10,11 @@ import { GetAllCharactersResponseType } from "./types";
  * @function useGetAllCharacters
  * @returns
  */
-const useGetAllCharacters = () => {
+const useGetAllCharacters = (name: string) => {
+
   return useInfiniteQuery<GetAllCharactersResponseType<Character>>(
     [ALL_CHARACTERS_DATA],
-    async ({ pageParam = 1 }) => await getAllCharacters(pageParam),
+    async ({ pageParam = 1 }) => await getAllCharacters(pageParam, { name }),
     {
       getPreviousPageParam: (firstPage) =>
         firstPage.characters.info.prev ?? undefined,

@@ -5,7 +5,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { SearchBarProps } from "./types";
 
 const SearchBar: FC<SearchBarProps> = (props) => {
-  const { onChange } = props;
+  const { onChange, placeHolder } = props;
   return (
     <Box
       sx={{
@@ -18,9 +18,9 @@ const SearchBar: FC<SearchBarProps> = (props) => {
         <SearchIcon sx={{ color: "grey", marginTop: ".2rem" }} />
         <InputBase
           onChange={onChange}
-          placeholder="Search…"
+          placeholder={placeHolder ?? "Search…"}
           inputProps={{ "aria-label": "search" }}
-          sx={{ marginLeft: "1rem" }}
+          sx={{ marginLeft: "1rem", width: "100%" }}
         />
       </Box>
     </Box>
